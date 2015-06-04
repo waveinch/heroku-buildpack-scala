@@ -56,6 +56,8 @@ SBT_USER_HOME_ABSOLUTE="$BUILD_DIR/$SBT_USER_HOME"
 # where we put the SBT binaries
 SBT_BINDIR="$SBT_USER_HOME"/bin
 
+
+
 # chdir as sbt expects
 cd $BUILD_DIR
 
@@ -64,6 +66,9 @@ CACHED_DIRS="$SBT_USER_HOME target project/target project/boot"
 for DIR in $CACHED_DIRS; do
   cache_copy $DIR $CACHE_DIR $BUILD_DIR
 done
+
+echo "-----> Dropping ivy cache from the slug" 
+rm -rf $SBT_USER_HOME/.ivy2
 
 # these are preliminary checks. actual version check happens below when attempting to download sbt boot.properties
 if ! test -e project/build.properties; then
